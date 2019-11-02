@@ -35,6 +35,17 @@ export const Owner = styled.header`
     color: #7159c1;
     font-size: 16px;
     text-decoration: none;
+    padding: 10px;
+    border-radius: 4px;
+
+    &:hover {
+      opacity: 1;
+      background: #7159c1;
+      color: #fff;
+
+      box-shadow: 0 0 10px rgba(113, 89, 193, 0.9);
+      transition: 0.3s all ease-in-out;
+    }
   }
 
   img {
@@ -55,6 +66,12 @@ export const Owner = styled.header`
     line-height: 1.4;
     text-align: center;
     max-height: 400px;
+  }
+
+  div {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
   }
 `;
 
@@ -114,5 +131,99 @@ export const IssueList = styled.ul`
         color: #999;
       }
     }
+  }
+`;
+
+export const AllButton = styled.button.attrs(props => ({
+  disabled: props.all,
+}))`
+  width: 90px;
+  background: #fff;
+  color: #7159c1;
+  border: 0;
+  padding: 8px 15px;
+  margin: 0 15px;
+  border-radius: 4px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(113, 89, 193, 0.9);
+  transition: 0.3s all ease-in-out;
+
+  &[disabled] {
+    background: #7159c1;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(113, 89, 193, 0.9);
+    width: 110px;
+  }
+  &:hover {
+    opacity: 1;
+    background: #7159c1;
+    color: #fff;
+    transition: 0.3s all ease-in-out;
+    width: 110px;
+  }
+`;
+export const ClosedButton = styled.button.attrs(props => ({
+  disabled: props.closed,
+}))`
+  width: 90px;
+  background: #fff;
+  color: #7159c1;
+  border: 0;
+  padding: 8px 15px;
+  margin: 0 15px;
+  border-radius: 4px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(113, 89, 193, 0.9);
+  transition: 0.3s all ease-in-out;
+
+  &[disabled] {
+    background: #7159c1;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(113, 89, 193, 0.9);
+    width: 110px;
+  }
+  &:hover {
+    opacity: 1;
+    background: #7159c1;
+    color: #fff;
+    transition: 0.3s all ease-in-out;
+    width: 110px;
+  }
+`;
+export const OpenButton = styled.button.attrs(props => ({
+  disabled: props.open,
+}))`
+  width: 90px;
+  background: #fff;
+  color: #7159c1;
+  border: 0;
+  padding: 8px 15px;
+  margin: 0 15px;
+  border-radius: 4px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(113, 89, 193, 0.9);
+  transition: 0.3s all ease-in-out;
+
+  &[disabled] {
+    background: #7159c1;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(113, 89, 193, 0.9);
+    width: 110px;
+  }
+  &:hover {
+    opacity: 1;
+    background: #7159c1;
+    color: #fff;
+    transition: 0.3s all ease-in-out;
+    width: 110px;
   }
 `;

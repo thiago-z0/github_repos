@@ -12,6 +12,7 @@ export default class Main extends Component {
     newRepo: '',
     repositories: [],
     loading: false,
+    redEdge: false,
   };
 
   // Carregar os dados do LocalStorage
@@ -33,31 +34,45 @@ export default class Main extends Component {
   }
 
   handleInputChange = e => {
-    this.setState({ newRepo: e.target.value });
+    this.setState({ newRepo: e.target.value, error: null });
   };
 
   handleSubmit = async e => {
     e.preventDefault();
 
-    this.setState({ loading: true });
+    this.setState({ loading: true, error: false });
 
-    const { newRepo, repositories } = this.state;
+    try {
+      const { newRepo, repositories } = this.state;
 
-    const response = await api.get(`/repos/${newRepo}`);
+      if (newRepo === '') throw 'Você precisa indicar um repositório';
 
-    const data = {
-      name: response.data.full_name,
-    };
+      const hasRepo = repositories.find(r => r.name === newRepo);
 
-    this.setState({
-      repositories: [...repositories, data],
-      newRepo: '',
-      loading: false,
-    });
+      if (hasRepo) throw 'Repositório duplicado';
+
+      const response = await api.get(`/repos/${newRepo}`);
+
+      const data = {
+        name: response.data.full_name,
+      };
+
+      this.setState({
+        repositories: [...repositories, data],
+        newRepo: '',
+        loading: false,
+        redEdge: false,
+      });
+    } catch (error) {
+      this.setState({ error: true, redEdge: true });
+      console.log('erro');
+    } finally {
+      this.setState({ loading: false });
+    }
   };
 
   render() {
-    const { newRepo, loading, repositories } = this.state;
+    const { newRepo, loading, repositories, redEdge } = this.state;
 
     return (
       <Container>
@@ -67,12 +82,25 @@ export default class Main extends Component {
         </h1>
 
         <Form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            placeholder="Adicionar Repositório"
-            value={newRepo}
-            onChange={this.handleInputChange}
-          />
+          {redEdge ? (
+            <input
+              id="redEdge"
+              type="text"
+              placeholder="Adicionar Repositório"
+              value={newRepo}
+              onChange={this.handleInputChange}
+              redEdge={redEdge}
+            />
+          ) : (
+            <input
+              type="text"
+              placeholder="Adicionar Repositório"
+              value={newRepo}
+              onChange={this.handleInputChange}
+              redEdge={redEdge}
+            />
+          )}
+
           <SubmitButton loading={loading}>
             {loading ? (
               <FaSpinner color="#fff" size={14} />

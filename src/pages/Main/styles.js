@@ -12,6 +12,13 @@ export const Form = styled.form`
     border-radius: 4px;
     font-size: 16px;
   }
+  #redEdge {
+    flex: 1;
+    border: 1px solid #ff0000;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 16px;
+  }
 `;
 
 const rotate = keyframes`
